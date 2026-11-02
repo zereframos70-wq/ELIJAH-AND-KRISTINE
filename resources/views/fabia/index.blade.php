@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Kristine Irish A. Fabia is an aspiring IT professional and student developer.">
+    <title>Kristine Irish A. Fabia | Aspiring IT Professional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/portfolios/fabia.js'])
+</head>
+<body>
+    <div class="fabia-portfolio bg-ink text-slate-200 antialiased">
+<header id="siteHeader" class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur">
+  <nav class="relative mx-auto flex h-16 w-full items-center justify-between px-5 md:w-[90%] md:px-0 lg:w-[93%]">
+    <a href="#home" class="flex items-center gap-3 text-base font-semibold">
+      <span class="logo">KF</span>
+      <span class="border-l border-white/15 pl-3">Kristine Fabia</span>
+    </a>
+    <ul id="menu" class="hidden items-center gap-5 text-sm text-slate-400 lg:gap-8 md:flex">
+      <li><a class="nav-link" href="#home">Home</a></li>
+      <li><a class="nav-link" href="#about">About</a></li>
+      <li><a class="nav-link" href="#skills">Skills</a></li>
+      <li><a class="nav-link" href="#projects">Projects</a></li>
+      <li><a class="nav-link" href="#education">Education</a></li>
+      <li><a class="nav-link" href="#contact">Contact</a></li>
+      @can('manage-projects')
+        <li><a class="rounded-lg border border-violet-400/40 bg-violet-400/10 px-3 py-2 text-sm text-white transition hover:bg-violet-400/20" href="{{ route('projects.index') }}">Manage Projects</a></li>
+      @endcan
+    </ul>
+    <div class="flex items-center gap-3">
+      <a href="#contact" aria-label="Contact profile" class="grid size-9 place-items-center rounded-lg bg-linear-to-br from-pink-500 to-fuchsia-600 shadow-[0_0_14px_rgba(255,45,111,0.5)] transition hover:scale-105">
+        <svg class="size-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+      </a>
+      <form method="POST" action="{{ route('logout') }}" class="hidden md:block">
+        @csrf
+        <button type="submit" class="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200 transition hover:border-violet-400/40 hover:bg-violet-400/10">Log out</button>
+      </form>
+      <button id="toggle" class="grid size-9 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-200 transition hover:border-violet-400/40 hover:bg-violet-400/10 md:hidden" aria-label="Open navigation menu" aria-controls="mobileDrawer" aria-expanded="false">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<button id="drawerBackdrop" class="drawer-backdrop" type="button" aria-label="Dismiss navigation backdrop" tabindex="-1"></button>
+<aside id="mobileDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true" inert>
+  <div class="drawer-top">
+    <a href="#home" class="drawer-brand" aria-label="Kristine Fabia, home">
+      <span class="logo">KF</span>
+      <span><strong>Kristine Fabia</strong><small>Portfolio navigation</small></span>
+    </a>
+    <button id="closeDrawer" class="drawer-close" type="button" aria-label="Close menu">
+      <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer-content">
+    <p class="drawer-label">Explore</p>
+    <ul class="drawer-links">
+      <li><a class="nav-link" href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg><span>Home</span><span class="drawer-arrow">↗</span></a></li>
+      <li><a class="nav-link" href="#about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>About</span><span class="drawer-arrow">↗</span></a></li>
+      <li><a class="nav-link" href="#skills"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-10-2 12"/></svg><span>Skills</span><span class="drawer-arrow">↗</span></a></li>
+      <li><a class="nav-link" href="#projects"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg><span>Projects</span><span class="drawer-arrow">↗</span></a></li>
+      <li><a class="nav-link" href="#education"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c3 3 9 3 12 0v-5m4-2v7"/></svg><span>Education</span><span class="drawer-arrow">↗</span></a></li>
+      <li><a class="nav-link" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Contact</span><span class="drawer-arrow">↗</span></a></li>
+      @can('manage-projects')
+        <li><a class="nav-link" href="{{ route('projects.index') }}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg><span>Manage Projects</span><span class="drawer-arrow">↗</span></a></li>
+      @endcan
+    </ul>
+    <form method="POST" action="{{ route('logout') }}" class="mt-5 md:hidden">
+      @csrf
+      <button type="submit" class="btn-ghost w-full">Log out</button>
+    </form>
+  </div>
+</aside>
+
+<main>
+<!-- Hero -->
+<section id="home" class="relative overflow-hidden">
+  <!-- Background glows -->
+  <div class="pointer-events-none absolute -left-40 top-0 size-96 rounded-full bg-fuchsia-600/20 blur-3xl"></div>
+  <div class="pointer-events-none absolute -right-20 top-1/3 size-md rounded-full bg-teal-500/15 blur-3xl"></div>
+
+  <div class="relative mx-auto grid w-full items-center gap-14 px-5 pb-20 pt-32 md:w-[90%] md:grid-cols-2 md:px-0 lg:w-[93%] lg:gap-20">
+
+    <!-- Left: text -->
+    <div class="hero-copy min-w-0">
+      <span class="hero-label">
+        <span class="hero-label-star" aria-hidden="true">✦</span>
+        <span class="hero-label-indicator" aria-hidden="true"></span>
+        BS INFORMATION TECHNOLOGY STUDENT
+      </span>
+
+      <h1 class="hero-title mt-6 font-display font-bold leading-[0.95] tracking-tight">
+        Build. Create.
+        <span class="hero-title-accent block">Innovate.</span>
+      </h1>
+
+      <div class="hero-identity mt-5">
+        <span class="hero-name">Kristine Irish A. Fabia</span>
+        <span class="hero-identity-divider" aria-hidden="true"></span>
+        <span class="hero-role">Aspiring IT Professional <span aria-hidden="true">|</span> Future Developer</span>
+      </div>
+
+      <p class="hero-intro mt-4">I turn ideas into meaningful digital experiences through creativity, technology, and continuous learning.</p>
+
+      <div class="hero-actions mt-7">
+        <a href="#projects" class="hero-button hero-button-primary">
+          Explore My Work
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+        </a>
+        <a href="#contact" class="hero-button hero-button-secondary">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>
+          Let's Connect
+        </a>
+      </div>
+
+      <dl class="hero-stats mt-9">
+        <div><dt class="hero-stat-value hero-stat-cyan">03+</dt><dd>ACADEMIC BUILDS</dd></div>
+        <div><dt class="hero-stat-value hero-stat-violet">UCU</dt><dd>UNIVERSITY</dd></div>
+        <div><dt class="hero-stat-value hero-stat-yellow">∞</dt><dd>ALWAYS LEARNING</dd></div>
+      </dl>
+    </div>
+
+    <!-- Right: image card -->
+    <div class="relative mx-auto w-full max-w-sm md:max-w-none">
+      <div class="portrait-ambient absolute inset-6 rounded-3xl blur-3xl"></div>
+
+      <div class="portrait-card group relative rounded-3xl border border-white/10 p-4">
+        <span class="portrait-orbit portrait-orbit-a" aria-hidden="true"></span>
+        <span class="portrait-orbit portrait-orbit-b" aria-hidden="true"></span>
+        <span class="portrait-secondary-frame" aria-hidden="true"></span>
+        <div class="hero-photo-frame relative z-10 aspect-[3/4] overflow-hidden rounded-2xl">
+          <img id="heroImg" alt="Portrait of Kristine Irish A. Fabia"
+               class="hero-photo absolute inset-0 transition duration-500 group-hover:scale-105">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="about-section py-14 md:py-16">
+  <div class="about-reveal">
+    <p class="eyebrow about-eyebrow">Dark Designs &amp; Adventures</p>
+    <h2 class="title about-title">About Me</h2>
+    <p class="about-subtitle mt-2">Passionate about applying foundational computing principles to real-world impact.</p>
+  </div>
+  <div class="card about-bio about-reveal mt-6">
+    <p class="about-bio-copy">I am Kristine Irish A. Fabia, a Bachelor of Science in Information Technology student who is passionate about learning how technology can solve real-world problems. I enjoy exploring web development, mobile application development, user interface design, and emerging technologies. As I continue my studies, my goal is to strengthen my technical skills, gain practical experience, and create useful and meaningful digital solutions.</p>
+    <div class="about-facts">
+      <span class="about-fact">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c3 3 9 3 12 0v-5m4-2v7"/></svg>
+        BS Information Technology
+      </span>
+      <span class="about-fact">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4"/></svg>
+        Urdaneta City University
+      </span>
+      <span class="about-fact">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18m-11 0v2h4v-2"/></svg>
+        Open for internship
+      </span>
+    </div>
+  </div>
+  <div class="about-goals-heading about-reveal">
+    <p class="eyebrow about-eyebrow">Looking Ahead</p>
+    <h3 class="about-goals-title">My Core Goals</h3>
+  </div>
+  <div class="about-goals-grid">
+    <article class="card about-goal-card about-goal-violet about-reveal">
+      <span class="about-goal-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>
+      </span>
+      <h4>Improve My Skills</h4>
+      <p>Continuously develop my programming, design, and technical skills.</p>
+    </article>
+    <article class="card about-goal-card about-goal-indigo about-reveal">
+      <span class="about-goal-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg>
+      </span>
+      <h4>Build Meaningful Projects</h4>
+      <p>Create practical digital solutions that can solve real needs.</p>
+    </article>
+    <article class="card about-goal-card about-goal-magenta about-reveal">
+      <span class="about-goal-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v5c0 5 3.4 8 8 9 4.6-1 8-4 8-9V7l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+      </span>
+      <h4>Become a Professional IT Developer</h4>
+      <p>Prepare myself for a successful career in the IT industry.</p>
+    </article>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="mx-auto w-full px-5 py-16 md:w-[90%] md:px-0 lg:w-[93%]">
+  <p class="eyebrow">Core Competencies</p>
+  <h2 class="title">Skills &amp; Technologies</h2>
+  <p class="text-slate-400 mt-1">Tools and skills I am continuously developing.</p>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+    <div class="card md:col-span-1 lg:col-span-2">
+      <h3 class="font-semibold text-sm mb-3">Technical Skills</h3>
+      <div class="grid sm:grid-cols-3 gap-2" id="tech"></div>
+    </div>
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">Soft Skills</h3>
+      <div class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-2" id="soft"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="mx-auto w-full px-5 py-16 md:w-[90%] md:px-0 lg:w-[93%]">
+  <p class="eyebrow">Portfolio Showcase</p>
+  <h2 class="title">Featured Projects</h2>
+  <p class="text-slate-400 mt-1">Academic projects and practical applications I have worked on.</p>
+  <div class="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-6" id="projectGrid" data-projects="{{ $projects->toJson() }}"></div>
+</section>
+
+<!-- Education -->
+<section id="education" class="mx-auto w-full px-5 py-16 md:w-[90%] md:px-0 lg:w-[93%]">
+  <p class="eyebrow">Timeline &amp; Training</p>
+  <h2 class="title">Education &amp; Experience</h2>
+  <p class="text-slate-400 mt-1">Academic journey, practical workshops, and relevant seminars.</p>
+  <ol class="timeline mt-8 space-y-4" id="timeline"></ol>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="mx-auto w-full px-5 py-16 md:w-[90%] md:px-0 lg:w-[93%]">
+  <p class="eyebrow">Get in Touch</p>
+  <h2 class="title">Let's Connect</h2>
+  <p class="text-slate-400 mt-1">Have a project, idea, or opportunity? Feel free to reach out.</p>
+  <div class="grid md:grid-cols-2 gap-6 mt-6">
+    <div class="card contact-info-card">
+      <div>
+        <h3 class="font-semibold text-sm">Contact Information</h3>
+        <p class="text-xs text-slate-400 mt-2">I am open to teamwork, internship discussions, and junior development opportunities.</p>
+      </div>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          </span>
+          <div class="contact-detail-copy">
+            <span class="contact-detail-label">Email</span>
+            <a class="contact-detail-link" href="mailto:kristine.fabia@ucu.edu.ph">kristine.fabia@ucu.edu.ph</a>
+          </div>
+          <button id="copyEmail" class="contact-copy-button" type="button" aria-label="Copy email address" title="Copy email address">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>
+          </button>
+        </div>
+        <p id="copyEmailStatus" class="contact-copy-status" role="status" aria-live="polite"></p>
+        <a class="contact-detail contact-detail-anchor" href="https://github.com/kristinefabia788" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.7c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19 5.1 4.8 4.8 0 0 0 18.9 1S17.7.7 15 2.5a13.3 13.3 0 0 0-7 0C5.3.7 4.1 1 4.1 1A4.8 4.8 0 0 0 4 5.1a5.2 5.2 0 0 0-1.3 3.6c0 5.2 3.2 6.4 6.2 6.7A3.4 3.4 0 0 0 8 18.1V22"/></svg>
+          </span>
+          <span class="contact-detail-copy">
+            <span class="contact-detail-label">GitHub</span>
+            <span class="contact-detail-link">github.com/kristinefabia788</span>
+          </span>
+          <svg class="contact-external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-label="Opens in a new tab"><path d="M14 4h6v6m0-6-9 9"/><path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/></svg>
+        </a>
+        <div class="contact-detail">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </span>
+          <span class="contact-detail-copy">
+            <span class="contact-detail-label">Location</span>
+            <span class="contact-detail-link">Pangasinan, Philippines</span>
+          </span>
+        </div>
+      </div>
+      <div class="contact-info-footer">
+        <p class="contact-availability"><span class="contact-availability-indicator" aria-hidden="true"></span>Open to Opportunities</p>
+        <a class="contact-email-button" href="mailto:kristine.fabia@ucu.edu.ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg>
+          <span>Send Me an Email</span>
+          <svg class="contact-button-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </div>
+    <form id="form" class="card space-y-3" novalidate>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <div>
+          <label class="lbl" for="contactName">Full Name</label>
+          <input id="contactName" name="name" type="text" autocomplete="name" required class="field">
+        </div>
+        <div>
+          <label class="lbl" for="contactEmail">Email Address</label>
+          <input id="contactEmail" name="email" type="email" autocomplete="email" required class="field">
+        </div>
+      </div>
+      <label class="lbl" for="contactSubject">Subject</label>
+      <input id="contactSubject" name="subject" required class="field">
+      <label class="lbl" for="contactMessage">Message</label>
+      <textarea id="contactMessage" name="message" rows="4" required class="field"></textarea>
+      <p id="status" class="text-xs min-h-4" role="status" aria-live="polite"></p>
+      <button class="btn-primary" type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="border-t border-white/5 mt-10">
+  <div class="mx-auto flex w-full flex-col justify-between gap-6 px-5 py-8 text-sm md:w-[90%] md:px-0 md:flex-row lg:w-[93%]">
+    <div><p class="font-semibold">Kristine Irish A. Fabia</p><p class="text-pink-400 text-xs mt-1">Aspiring IT Professional</p></div>
+    <ul class="grid grid-cols-2 gap-x-8 gap-y-1 text-xs text-slate-400">
+      <li><a href="#home">Home</a></li><li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li><li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <p class="mx-auto w-full px-5 pb-6 text-xs text-slate-400 md:w-[90%] md:px-0 lg:w-[93%]">© <span id="year"></span> Kristine Irish Fabia. All rights reserved.</p>
+</footer>
+    </div>
+</body>
+</html>

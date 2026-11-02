@@ -1,0 +1,165 @@
+/* fx.css — load AFTER motion.css */
+.portfolio-page {
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Intro curtain */
+.fx-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: #0b1511;
+    display: grid;
+    place-items: center;
+    transition: transform 1s var(--ease);
+    pointer-events: none;
+}
+.fx-curtain span {
+    font:
+        800 44px/1 'Manrope',
+        sans-serif;
+    color: #f1f5f2;
+    animation: fx-fade 0.6s var(--ease) both;
+}
+.fx-curtain i {
+    color: #55a783;
+    font-style: normal;
+}
+.fx-curtain.out {
+    transform: translateY(-100%);
+}
+@keyframes fx-fade {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Smoke canvas: above page content, below sticky header */
+.fx-smoke {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+}
+
+/* Hero headline letters */
+.mo #home .fx-split {
+    animation: none !important;
+}
+.fx-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+.fx-ch {
+    display: inline-block;
+    animation: fx-char 1s var(--ease) both;
+    animation-delay: calc(0.9s + var(--i) * 45ms);
+}
+@keyframes fx-char {
+    from {
+        opacity: 0;
+        transform: translateY(55%) rotate(5deg);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Profile tilt + glare */
+.fx-tilt {
+    position: relative;
+    display: grid;
+    place-items: center;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+.fx-glare {
+    position: absolute;
+    inset: 0;
+    z-index: 11;
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: soft-light;
+    background: radial-gradient(
+        circle at var(--gx, 50%) var(--gy, 50%),
+        rgba(255, 255, 255, 0.55),
+        transparent 55%
+    );
+}
+#home [aria-label='Decorative profile illustration'] > * {
+    transition: translate 0.2s linear;
+}
+.fx-tilt img {
+    transition: transform 1.2s var(--ease);
+}
+.fx-tilt:hover img {
+    transform: scale(1.05);
+}
+
+/* Magnetic buttons need translate to ease back */
+.portfolio-page a[class*='bg-emerald-rich'],
+.portfolio-page button[type='submit'],
+.portfolio-page header a[href='#contact'] {
+    transition:
+        transform 0.3s var(--ease),
+        background-color 0.3s,
+        box-shadow 0.3s,
+        translate 0.45s var(--ease);
+}
+
+/* Eyebrow lines draw in on reveal */
+.mo [data-reveal] .h-px {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.9s var(--ease) 0.3s;
+}
+.mo [data-reveal].in .h-px,
+.mo [data-reveal].in.h-px {
+    transform: scaleX(1);
+}
+
+/* Project card cursor spotlight */
+#projects article {
+    position: relative;
+}
+#projects article::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    background: radial-gradient(
+        260px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(85, 167, 131, 0.16),
+        transparent 70%
+    );
+}
+@media (hover: hover) {
+    #projects article:hover::after {
+        opacity: 1;
+    }
+}
+
+/* Smooth section hand-off */
+html:has(.portfolio-page) {
+    scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+    .portfolio-page .fx-curtain,
+    .portfolio-page .fx-smoke,
+    .portfolio-page .fx-glare {
+        display: none;
+    }
+    .portfolio-page .fx-ch {
+        animation: none;
+    }
+}
